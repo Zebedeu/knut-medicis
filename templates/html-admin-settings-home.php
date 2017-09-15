@@ -1,13 +1,14 @@
 
 
 		<div class='wrap'>
-            <h2>Knut Medicis Settings</h2>
+            <h2>Knut Medicis Principal</h2>
 
             <nav class="teste">
             	<ul>
-            		<li><a href="#">Consultas</a></li>
-            		<li>Usuarios</li>
-            		<li>E-mail</li>
+            		<li><a href="#">Principal</a></li>
+            		<li>teste 2</li>
+            		<li>teste 3</li>
+            		<li>teste 4</li>
             	</ul>
             </nav>
 

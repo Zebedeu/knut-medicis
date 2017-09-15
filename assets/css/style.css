@@ -1,0 +1,31 @@
+
+.teste {
+	font-size: 16pt;
+}
+.teste ul {
+	border: 5px solid #282828;
+	padding: 20px 7px 20px 20px;
+	width: auto;
+	height: 50%;
+	-border-style: wave;
+	-box-shadow: 100px solid #565;
+
+}
+.teste li {
+
+	padding: 0 10px 0 10px;
+	display: inline;
+	border: 2px solid #565665;
+
+}
+
+.teste li a {
+	text-decoration: none;
+
+}
+ .teste li:hover, .teste li a:hover  {
+	background: red;
+
+
+
+}

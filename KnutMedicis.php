@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 /*
-Plugin Name: Kenut Medicis
+Plugin Name: Kenut
 Plugin URI: http://wordpress.org/plugins/KenutMedicis/
 Description:
 Author: Marcio Zebedeu
@@ -28,10 +28,16 @@ final class KnutMedicis
 
             self::$instance = new self();
             self::$instance->includes();
+            self::$instance->register_my_scripts();
         }
         return self::$instance;
 
     }
+
+function register_my_scripts(){
+wp_enqueue_style( 'style1', plugins_url( 'assets/css/style.css' , __FILE__ ) );
+wp_enqueue_script( 'js_script', plugins_url( 'assets/js/style.js' , __FILE__ ) );
+}
 
     /**
      * Include required files
@@ -49,7 +55,8 @@ final class KnutMedicis
        // Plugin Folder Path
         require_once EDD_PLUGIN_DIR . 'includes/admin/Welcome.php';
         require_once EDD_PLUGIN_DIR . 'includes/admin/class-km-DB.php';
-        require_once EDD_PLUGIN_DIR . 'templates/html-admin-settings.php';
+        require_once EDD_PLUGIN_DIR . 'includes/Page/PageTemplater.php';
+        require_once EDD_PLUGIN_DIR . 'includes/Page/sitepoint_contact_form.php';
 
         Welcome::GetInstance();
 
@@ -65,3 +72,5 @@ function add() {
     KnutMedicis::getInstance();
 }
 add();
+
+?>

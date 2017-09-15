@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 
-final class Welcome{
+ class Welcome{
 
     private $my_plugin_screen_name;
     private static $instance;
@@ -20,6 +20,8 @@ final class Welcome{
         return self::$instance;
     }
 
+
+
     public function PluginMenu()
     {
         $this->my_plugin_screen_name = add_menu_page(
@@ -28,44 +30,41 @@ final class Welcome{
             'manage_options',
             __FILE__,
             array($this, 'RenderPage_callback'),
-            plugins_url('assets/img/icon.jpg',__DIR__)
+            plugins_url('../../assets/images/icon/icon.ico', __FILE__),
+            50
         );
         add_submenu_page(__FILE__, 'Custom', 'Custom', 'manage_options', __FILE__.'/custom', array($this, 'KnutMedicis_render_custom_page_callback') ) ;
+        add_submenu_page(__FILE__, 'setting', 'setting', 'manage_options', __FILE__.'/setting', array($this, 'KnutMedicis_setting_callback') );
         add_submenu_page(__FILE__, 'About', 'About', 'manage_options', __FILE__.'/about', array($this, 'KnutMedicis_render_about_page_callback') );
 
     }
 
     public function RenderPage_callback(){
-        ?>
-
-        <div class='wrap'>
-            <h2>KnutMedicis Principal</h2>
-
-            <form method="POST" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-                <ul>
-                    <li><label for="fname">Family Name (Sir Name)<span> *</span>: </label>
-                        <input id="fname" maxlength="45" size="10" name="fname" value=""/></li>
-
-                    <li><label for="lname">Last Name<span> *</span>: </label>
-                        <input id="lname" maxlength="45" size="10" name="lname" value=""/></li>
-                </ul>
-            </form
-        </div>
-        <?php
+        require_once EDD_PLUGIN_DIR . 'templates/html-admin-settings-home.php';
+   
 
     }
 
     function KnutMedicis_render_custom_page_callback(){
         ?>
         <div class='wrap'>
-            <h2>KnutMedicis custom .</h2>
+            <h2>Knut Medicis custom</h2>
         </div>
         <?php
+    }
+      function KnutMedicis_setting_callback(){
+        require_once EDD_PLUGIN_DIR . 'templates/html-admin-settings.php';
+
     }
     function KnutMedicis_render_about_page_callback(){
         ?>
         <div class='wrap'>
-            <h2>KnutMedicis About</h2>
+            <h2>Knut Medicis About</h2>
+             <em>If you like this plugin, please <a href="http://wordpress.org/extend/plugins/Knut-Medicis">vote</a> .
+    Author : <a href="https://github.com/zebedeu">Máecio Zebedeu</a>
+    You can <a href="https://github.com/knut7/knut-medicis">for bugs,</a>  thanks.</em>
+
+    </div>
         </div>
         <?php
     }
@@ -132,13 +131,23 @@ final class Welcome{
         register_post_type( 'post_type', $args );
 
     }
-
+    function wpa3396_page_template( $page_template )
+{
+    if ( is_page( 'my-custom-page-slug' ) ) {
+        $page_template = dirname( __FILE__ ) . '/custom-page-template.php';
+    }
+    return $page_template;
+}
 
     private function InitPlugin()
     {
         add_action('admin_menu', array($this, 'PluginMenu'));
         add_action('init', array($this, 'post_type'));
         add_filter('post_type', array($this, 'mudar'));
+            add_filter( 'page_template', array($this, 'wpa3396_page_template') );
+
+
+
     }
 
 }
